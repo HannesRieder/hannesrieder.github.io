@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hannes Rieder</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="faviconn.ico">
+
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      font-family: 'Space Grotesk', sans-serif;
+      height: 100vh;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px);
+      background-size: 120px 120px;
+      background-attachment: fixed;
+      background-position: top left;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 2rem 6.7rem;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 12.4rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(to bottom right, #A22FCE, #FF7000);
+      background-size: 300% 300%;
+      background-position: 100% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 5s ease infinite;
+      line-height: 1;
+    }
+
+    p {
+      color: #ffffff;
+      font-size: 1.5rem;
+      margin-top: 1.4rem;
+      margin-left: 0.8rem;
+      font-size: 1.8rem;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 100% 100%;
+      }
+      50% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 100% 100%;
+      }
+    }
+    
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 28px;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+}
+  </style>
+</head>
+<body>
+  <h1>hannes<br>rieder&ThinSpace;*</h1>
+  <p>work in progress</p>
+  <div class="social-icons">
+  <a href="https://instagram.com/gipflaer" target="_blank" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://linkedin.com/in/hannesrieder" target="_blank" aria-label="LinkedIn">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+  <a href="mailto:hannesrieder08@gmail.com" aria-label="Email">
+    <i class="fas fa-envelope"></i>
+  </a>
+</div>
+
+</body>
+</html>
