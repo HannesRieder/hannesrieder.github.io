@@ -7,15 +7,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="description" content="Hannes Rieder – Digital portfolio and contact links. Work in progress.">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
+      font-family: 'Space Grotesk', Arial, sans-serif;
       background-color: #000000;
-      font-family: 'Space Grotesk', sans-serif;
       height: 100vh;
-      background-image: 
+      background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px);
       background-size: 120px 120px;
@@ -25,15 +30,12 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
-      padding: 2rem 6.7rem;
-      box-sizing: border-box;
-
-      /* Hide default cursor */
+      padding: 2rem;
       cursor: none;
     }
 
     h1 {
-      font-size: 12.4rem;
+      font-size: clamp(4rem, 12vw, 12.4rem); /* Responsive size */
       font-weight: 700;
       margin: 0;
       background: linear-gradient(to bottom right, #A22FCE, #FF7000);
@@ -47,9 +49,26 @@
 
     p {
       color: #ffffff;
-      font-size: 1.8rem;
-      margin-top: 1.4rem;
-      margin-left: 0.8rem;
+      font-size: 1.4rem;
+      margin-top: 1.2rem;
+      margin-left: 0.4rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
     }
 
     @keyframes gradientMove {
@@ -64,55 +83,63 @@
       }
     }
 
-    .social-icons {
-      display: flex;
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .social-icons a {
-      color: white;
-      font-size: 28px;
-      text-decoration: none;
-      transition: transform 0.3s;
-    }
-
-    .social-icons a:hover {
-      transform: scale(1.2);
-    }
-
-    /* Custom cursor styles */
-    .cursor {
+    /* Cursor styles (hidden on touch devices) */
+    .cursor,
+    .trail-ball {
       position: fixed;
-      top: 0; left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      mix-blend-mode: difference;
+      z-index: 9999;
+    }
+
+    .cursor {
       width: 8px;
       height: 8px;
       background: white;
-      border-radius: 50%;
-      pointer-events: none;
       transform: translate(-50%, -50%);
-      z-index: 9999;
-      mix-blend-mode: difference;
     }
 
     .trail-ball {
-      position: fixed;
-      top: 0; left: 0;
       width: 20px;
       height: 20px;
       background: rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
       z-index: 9998;
-      mix-blend-mode: difference;
+      transform: translate(-50%, -50%);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1.2rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+
+      .social-icons a {
+        font-size: 20px;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      /* Hide custom cursor on touch devices */
+      .cursor,
+      .trail-ball {
+        display: none;
+      }
+
+      body {
+        cursor: auto;
+      }
     }
   </style>
 </head>
 <body>
   <h1>hannes<br>rieder&ThinSpace;*</h1>
   <p>work in progress</p>
-  <div class="social-icons">
+
+  <nav class="social-icons" aria-label="Social media links">
     <a href="https://instagram.com/gipflaer" target="_blank" aria-label="Instagram">
       <i class="fab fa-instagram"></i>
     </a>
@@ -122,7 +149,7 @@
     <a href="mailto:hannesrieder08@gmail.com" aria-label="Email">
       <i class="fas fa-envelope"></i>
     </a>
-  </div>
+  </nav>
 
   <!-- Custom cursor elements -->
   <div class="cursor"></div>
