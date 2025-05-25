@@ -6,9 +6,8 @@
   <title>Hannes Rieder</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="faviconn.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  
   <style>
     body {
       margin: 0;
@@ -28,6 +27,9 @@
       align-items: flex-start;
       padding: 2rem 6.7rem;
       box-sizing: border-box;
+
+      /* Hide default cursor */
+      cursor: none;
     }
 
     h1 {
@@ -45,10 +47,9 @@
 
     p {
       color: #ffffff;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       margin-top: 1.4rem;
       margin-left: 0.8rem;
-      font-size: 1.8rem;
     }
 
     @keyframes gradientMove {
@@ -62,40 +63,94 @@
         background-position: 100% 100%;
       }
     }
-    
 
-.social-icons {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-}
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
 
-.social-icons a {
-  color: white;
-  font-size: 28px;
-  text-decoration: none;
-  transition: transform 0.3s;
-}
+    .social-icons a {
+      color: white;
+      font-size: 28px;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
 
-.social-icons a:hover {
-  transform: scale(1.2);
-}
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    /* Custom cursor styles */
+    .cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
+
+    .trail-ball {
+      position: fixed;
+      top: 0; left: 0;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9998;
+      mix-blend-mode: difference;
+    }
   </style>
 </head>
 <body>
   <h1>hannes<br>rieder&ThinSpace;*</h1>
   <p>work in progress</p>
   <div class="social-icons">
-  <a href="https://instagram.com/gipflaer" target="_blank" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-  <a href="https://linkedin.com/in/hannesrieder" target="_blank" aria-label="LinkedIn">
-    <i class="fab fa-linkedin-in"></i>
-  </a>
-  <a href="mailto:hannesrieder08@gmail.com" aria-label="Email">
-    <i class="fas fa-envelope"></i>
-  </a>
-</div>
+    <a href="https://instagram.com/gipflaer" target="_blank" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://linkedin.com/in/hannesrieder" target="_blank" aria-label="LinkedIn">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="mailto:hannesrieder08@gmail.com" aria-label="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+  </div>
 
+  <!-- Custom cursor elements -->
+  <div class="cursor"></div>
+  <div class="trail-ball"></div>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    const trail = document.querySelector('.trail-ball');
+
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    function animate() {
+      trailX += (mouseX - trailX) * 0.1;
+      trailY += (mouseY - trailY) * 0.1;
+      trail.style.left = trailX + 'px';
+      trail.style.top = trailY + 'px';
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
