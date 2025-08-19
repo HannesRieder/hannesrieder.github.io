@@ -6,6 +6,7 @@
   <title>Hannes Rieder</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
@@ -21,12 +22,13 @@
     }
 
     h1 {
+      position: relative;
       font-size: clamp(4rem, 12vw, 10rem);
       font-weight: 700;
       text-transform: lowercase;
       text-align: center;
 
-      /* Gradient */
+      /* Gradient text */
       background: conic-gradient(
         from 0deg,
         #ff6b00,
@@ -35,14 +37,37 @@
         #00d4ff,
         #ff6b00
       );
-      background-size: 400% 400%;
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
 
-      /* Subtle glow following gradient */
-      filter: drop-shadow(0 0 8px currentColor);
+      animation: gradientFlow 25s linear infinite;
+    }
 
-      animation: gradientShift 12s ease infinite;
+    /* Glow behind text */
+    h1::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: -1;
+
+      background: conic-gradient(
+        from 0deg,
+        #ff6b00,
+        #ff007a,
+        #7000ff,
+        #00d4ff,
+        #ff6b00
+      );
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      filter: blur(40px) opacity(0.6); /* glowing shadow */
+      animation: gradientFlow 25s linear infinite;
     }
 
     p {
@@ -69,7 +94,7 @@
       color: #00d4ff;
     }
 
-    @keyframes gradientShift {
+    @keyframes gradientFlow {
       0%   { background-position: 0% 50%; }
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
@@ -84,13 +109,12 @@
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
-      transition: transform 0.1s ease;
       z-index: 9999;
     }
   </style>
 </head>
 <body>
-  <h1>hannes rieder*</h1>
+  <h1 data-text="hannes rieder*">hannes rieder*</h1>
   <p>digital portfolio – work in progress</p>
 
   <nav class="social-icons">
