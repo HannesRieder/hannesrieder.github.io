@@ -6,8 +6,6 @@
   <title>Hannes Rieder</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-
   <style>
     body {
       margin: 0;
@@ -19,30 +17,38 @@
       background: #000;
       font-family: 'Space Grotesk', sans-serif;
       overflow: hidden;
-      cursor: none;
     }
 
     h1 {
-      font-size: clamp(3.5rem, 12vw, 10rem);
+      font-size: clamp(4rem, 12vw, 10rem);
       font-weight: 700;
       text-transform: lowercase;
-      background: linear-gradient(270deg, #ff00cc, #3333ff, #00f0ff);
-      background-size: 600% 600%;
+      text-align: center;
+
+      /* Gradient */
+      background: conic-gradient(
+        from 0deg,
+        #ff6b00,
+        #ff007a,
+        #7000ff,
+        #00d4ff,
+        #ff6b00
+      );
+      background-size: 400% 400%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientFlow 8s ease infinite;
-      text-align: center;
-      line-height: 1.1;
-      text-shadow: 0 0 25px rgba(255, 0, 200, 0.7), 
-                   0 0 50px rgba(0, 200, 255, 0.6);
+
+      /* Subtle glow following gradient */
+      filter: drop-shadow(0 0 8px currentColor);
+
+      animation: gradientShift 12s ease infinite;
     }
 
     p {
-      color: #bbb;
+      color: #aaa;
       font-size: 1.3rem;
       margin-top: 1rem;
       text-align: center;
-      letter-spacing: 1px;
     }
 
     .social-icons {
@@ -59,38 +65,13 @@
 
     .social-icons a:hover {
       transform: scale(1.2);
-      color: #00f0ff;
+      color: #00d4ff;
     }
 
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
-    }
-
-    /* Glowing cursor */
-    .cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,255,255,0.8), rgba(255,0,200,0.4));
-      mix-blend-mode: screen;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      filter: blur(6px);
-      z-index: 1000;
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      .cursor {
-        display: none;
-      }
-      body {
-        cursor: auto;
-      }
     }
   </style>
 </head>
@@ -103,15 +84,5 @@
     <a href="https://linkedin.com/in/hannesrieder" target="_blank"><i class="fab fa-linkedin-in"></i></a>
     <a href="mailto:hannesrieder08@gmail.com"><i class="fas fa-envelope"></i></a>
   </nav>
-
-  <div class="cursor"></div>
-
-  <script>
-    const cursor = document.querySelector('.cursor');
-    window.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-  </script>
 </body>
 </html>
