@@ -18,7 +18,7 @@
       background: #000;
       font-family: 'Space Grotesk', sans-serif;
       overflow: hidden;
-      cursor: default; /* keep system cursor */
+      cursor: default;
     }
 
     h1 {
@@ -28,20 +28,12 @@
       text-transform: lowercase;
       text-align: center;
 
-      /* Gradient text */
-      background: conic-gradient(
-        from 0deg,
-        #ff6b00,
-        #ff007a,
-        #7000ff,
-        #00d4ff,
-        #ff6b00
-      );
-      background-size: 200% 200%;
+      /* Image gradient */
+      background: url('https://cdn.7tv.app/paint/01H4KSAWP80000TDEXCZCHXRPB/layer/01JAMR28DRMJ1C6EHWTDH8T5X3/1x.webp') no-repeat center/cover;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
 
-      animation: gradientFlow 25s linear infinite;
+      animation: moveBackground 25s linear infinite;
     }
 
     /* Glow behind text */
@@ -54,20 +46,12 @@
       text-align: center;
       z-index: -1;
 
-      background: conic-gradient(
-        from 0deg,
-        #ff6b00,
-        #ff007a,
-        #7000ff,
-        #00d4ff,
-        #ff6b00
-      );
-      background-size: 200% 200%;
+      background: url('https://cdn.7tv.app/paint/01H4KSAWP80000TDEXCZCHXRPB/layer/01JAMR28DRMJ1C6EHWTDH8T5X3/1x.webp') no-repeat center/cover;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
 
-      filter: blur(40px) opacity(0.6); /* glowing shadow */
-      animation: gradientFlow 25s linear infinite;
+      filter: blur(40px) opacity(0.6);
+      animation: moveBackground 25s linear infinite;
     }
 
     p {
@@ -94,10 +78,10 @@
       color: #00d4ff;
     }
 
-    @keyframes gradientFlow {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes moveBackground {
+      0%   { background-position: 0% 0%; }
+      50%  { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
     }
 
     /* Trailing circle */
