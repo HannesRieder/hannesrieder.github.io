@@ -5,130 +5,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hannes Rieder</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="faviconn.ico">
-  <meta name="description" content="Hannes Rieder – Digital portfolio and contact links. Work in progress.">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Space Grotesk', Arial, sans-serif;
-      background-color: #000000;
       height: 100vh;
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px);
-      background-size: 120px 120px;
-      background-attachment: fixed;
-      background-position: top left;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      padding: 2rem;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      font-family: 'Space Grotesk', sans-serif;
+      overflow: hidden;
       cursor: none;
     }
 
     h1 {
-      font-size: clamp(4rem, 12vw, 12.4rem); /* Responsive size */
+      font-size: clamp(3.5rem, 12vw, 10rem);
       font-weight: 700;
-      margin: 0;
-      background: linear-gradient(to bottom right, #A22FCE, #FF7000);
-      background-size: 300% 300%;
-      background-position: 100% 100%;
+      text-transform: lowercase;
+      background: linear-gradient(270deg, #ff00cc, #3333ff, #00f0ff);
+      background-size: 600% 600%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientMove 5s ease infinite;
-      line-height: 1;
+      animation: gradientFlow 8s ease infinite;
+      text-align: center;
+      line-height: 1.1;
+      text-shadow: 0 0 25px rgba(255, 0, 200, 0.7), 
+                   0 0 50px rgba(0, 200, 255, 0.6);
     }
 
     p {
-      color: #ffffff;
-      font-size: 1.4rem;
-      margin-top: 1.2rem;
-      margin-left: 0.4rem;
+      color: #bbb;
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      text-align: center;
+      letter-spacing: 1px;
     }
 
     .social-icons {
       display: flex;
-      gap: 16px;
-      padding: 16px 0;
+      gap: 24px;
+      margin-top: 2rem;
     }
 
     .social-icons a {
-      color: white;
-      font-size: 24px;
-      text-decoration: none;
-      transition: transform 0.3s;
+      color: #fff;
+      font-size: 1.8rem;
+      transition: transform 0.3s, color 0.3s;
     }
 
     .social-icons a:hover {
       transform: scale(1.2);
+      color: #00f0ff;
     }
 
-    @keyframes gradientMove {
-      0% {
-        background-position: 100% 100%;
-      }
-      50% {
-        background-position: 0% 0%;
-      }
-      100% {
-        background-position: 100% 100%;
-      }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    /* Cursor styles (hidden on touch devices) */
-    .cursor,
-    .trail-ball {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      mix-blend-mode: difference;
-      z-index: 9999;
-    }
-
+    /* Glowing cursor */
     .cursor {
-      width: 8px;
-      height: 8px;
-      background: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,255,0.8), rgba(255,0,200,0.4));
+      mix-blend-mode: screen;
+      pointer-events: none;
       transform: translate(-50%, -50%);
-    }
-
-    .trail-ball {
-      width: 20px;
-      height: 20px;
-      background: rgba(255, 255, 255, 0.5);
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 1.2rem;
-      }
-
-      p {
-        font-size: 1.2rem;
-      }
-
-      .social-icons a {
-        font-size: 20px;
-      }
+      filter: blur(6px);
+      z-index: 1000;
     }
 
     @media (hover: none) and (pointer: coarse) {
-      /* Hide custom cursor on touch devices */
-      .cursor,
-      .trail-ball {
+      .cursor {
         display: none;
       }
-
       body {
         cursor: auto;
       }
@@ -136,48 +95,23 @@
   </style>
 </head>
 <body>
-  <h1>hannes<br>rieder&ThinSpace;*</h1>
-  <p>work in progress</p>
+  <h1>hannes rieder*</h1>
+  <p>digital portfolio – work in progress</p>
 
-  <nav class="social-icons" aria-label="Social media links">
-    <a href="https://instagram.com/gipflaer" target="_blank" aria-label="Instagram">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://linkedin.com/in/hannesrieder" target="_blank" aria-label="LinkedIn">
-      <i class="fab fa-linkedin-in"></i>
-    </a>
-    <a href="mailto:hannesrieder08@gmail.com" aria-label="Email">
-      <i class="fas fa-envelope"></i>
-    </a>
+  <nav class="social-icons">
+    <a href="https://instagram.com/gipflaer" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://linkedin.com/in/hannesrieder" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a href="mailto:hannesrieder08@gmail.com"><i class="fas fa-envelope"></i></a>
   </nav>
 
-  <!-- Custom cursor elements -->
   <div class="cursor"></div>
-  <div class="trail-ball"></div>
 
   <script>
     const cursor = document.querySelector('.cursor');
-    const trail = document.querySelector('.trail-ball');
-
-    let mouseX = 0, mouseY = 0;
-    let trailX = 0, trailY = 0;
-
     window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursor.style.left = mouseX + 'px';
-      cursor.style.top = mouseY + 'px';
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
     });
-
-    function animate() {
-      trailX += (mouseX - trailX) * 0.1;
-      trailY += (mouseY - trailY) * 0.1;
-      trail.style.left = trailX + 'px';
-      trail.style.top = trailY + 'px';
-      requestAnimationFrame(animate);
-    }
-
-    animate();
   </script>
 </body>
 </html>
