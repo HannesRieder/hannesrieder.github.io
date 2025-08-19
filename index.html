@@ -17,6 +17,7 @@
       background: #000;
       font-family: 'Space Grotesk', sans-serif;
       overflow: hidden;
+      cursor: default; /* keep system cursor */
     }
 
     h1 {
@@ -73,6 +74,19 @@
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
+    /* Trailing circle */
+    .trail {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+      z-index: 9999;
+    }
   </style>
 </head>
 <body>
@@ -84,5 +98,29 @@
     <a href="https://linkedin.com/in/hannesrieder" target="_blank"><i class="fab fa-linkedin-in"></i></a>
     <a href="mailto:hannesrieder08@gmail.com"><i class="fas fa-envelope"></i></a>
   </nav>
+
+  <!-- trailing circle -->
+  <div class="trail"></div>
+
+  <script>
+    const trail = document.querySelector('.trail');
+    let mouseX = 0, mouseY = 0;
+    let trailX = 0, trailY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animate() {
+      trailX += (mouseX - trailX) * 0.2;
+      trailY += (mouseY - trailY) * 0.2;
+      trail.style.left = trailX + 'px';
+      trail.style.top = trailY + 'px';
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
