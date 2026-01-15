@@ -484,6 +484,9 @@ footer .footer-right a:hover {
   justify-content: space-between;
   cursor: pointer;
   z-index: 1001; /* on top */
+  background: none;
+  border: 0;
+  padding: 0;
 }
 
 .burger-menu span {
@@ -493,6 +496,12 @@ footer .footer-right a:hover {
   background: #fff;
   border-radius: 2px;
   transition: all 0.3s ease;
+}
+
+.burger-menu:focus-visible {
+  outline: 2px solid #00d4ff;
+  outline-offset: 6px;
+  border-radius: 6px;
 }
 
 /* Mobile Nav */
@@ -545,11 +554,11 @@ footer .footer-right a:hover {
 <body data-scroll-container>
 
   <!-- Burger Menu -->
-<div class="burger-menu" id="burger-menu">
+<button class="burger-menu" id="burger-menu" type="button" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open navigation menu">
   <span></span>
   <span></span>
   <span></span>
-</div>
+</button>
 
 <nav class="mobile-nav" id="mobile-nav">
   <a href="#about">about me</a>
@@ -720,8 +729,9 @@ const burger = document.getElementById('burger-menu');
 const mobileNav = document.getElementById('mobile-nav');
 
 burger.addEventListener('click', () => {
-  burger.classList.toggle('active');
-  mobileNav.classList.toggle('active');
+  const isOpen = burger.classList.toggle('active');
+  mobileNav.classList.toggle('active', isOpen);
+  burger.setAttribute('aria-expanded', isOpen);
 });
 
 // Close menu when link clicked
@@ -729,6 +739,7 @@ document.querySelectorAll('.mobile-nav a').forEach(link => {
   link.addEventListener('click', () => {
     burger.classList.remove('active');
     mobileNav.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
   });
 });
 </script>
