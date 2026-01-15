@@ -337,8 +337,8 @@ footer .footer-right a:hover {
   background-color: transparent;
   color: #fff; /* white text */
   width: 180px;
-  height: 200px;
-  border: 1px solid #444; /* subtle border for dark bg */
+  height: 180px;
+  border: 2px solid #fff; /* solid white border */
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
@@ -347,50 +347,9 @@ footer .footer-right a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.skill-icon {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 0.5rem;
-  transition: transform 0.3s ease;
-}
-
-.skill-name {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0.5rem 0;
-  color: #fff; /* ensure title is white */
-  transition: transform 0.3s ease;
-}
-
-.skill-description {
-  font-size: 0.85rem;
-  color: #ccc; /* softer white for description */
-  opacity: 0;
-  transition: all 0.3s ease;
-  transform: translateY(10px);
-}
-
-.skill-card {
-  background-color: transparent;
-  color: #fff; /* white text */
-  width: 180px;
-  height: 180px;
-  border: 2px solid #fff; /* solid white border */
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .skill-icon {
@@ -407,9 +366,16 @@ footer .footer-right a:hover {
   font-weight: 600;
   margin: 0;
   color: #fff; /* ensure title is white */
+  transition: transform 0.3s ease;
 }
 
-
+.skill-description {
+  font-size: 0.85rem;
+  color: #ccc; /* softer white for description */
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform: translateY(10px);
+}
 
 .skill-card:hover .skill-icon {
   transform: scale(1.1);
