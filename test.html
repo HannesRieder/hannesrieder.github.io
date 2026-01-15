@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hannes Rieder – Digital Portfolio</title>
+
+<meta name="description" content="Digital portfolio of Hannes Rieder – Mediamatiker, Web Developer & Creative Coder.">
+<meta name="author" content="Hannes Rieder">
+
+<link rel="icon" type="image/x-icon" href="faviconn.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================= GLOBAL ================= */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:6rem 2rem;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
+section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+p{
+  color:#aaa;
+  font-size:1.3rem;
+  max-width:700px;
+  text-align:center;
+  line-height:1.6;
+}
+
+/* ================= TEXTURE HEADINGS ================= */
+.heading{
+  position:relative;
+  font-size:clamp(3rem,8vw,6rem);
+  font-weight:700;
+  text-transform:lowercase;
+  text-align:center;
+  background:var(--bg) no-repeat center/cover;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:moveBg 25s linear infinite;
+  margin-bottom:3rem;
+}
+.heading::after{
+  content:attr(data-text);
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:var(--bg) no-repeat center/cover;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:blur(40px) opacity(.6);
+}
+
+@keyframes moveBg{
+  0%{background-position:0% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:0% 0%}
+}
+
+/* ================= HERO ================= */
+header{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+header h1{
+  font-size:clamp(4rem,12vw,10rem);
+  background:url('https://cdn.7tv.app/paint/01H4KSAWP80000TDEXCZCHXRPB/layer/01JAMR28DRMJ1C6EHWTDH8T5X3/1x.webp') no-repeat center/cover;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:moveBg 25s linear infinite;
+}
+.socials{
+  display:flex;
+  gap:2rem;
+  margin-top:2rem;
+}
+.socials a{
+  font-size:1.8rem;
+  color:#fff;
+  transition:.3s;
+}
+.socials a:hover{color:#00d4ff;transform:scale(1.2)}
+
+/* ================= ABOUT ================= */
+#about{--bg:url('https://cdn.7tv.app/paint/01J5RED5XG000B1N2JYV35K6EC/layer/01JAMR39Z9X87VV32WG5B4TR78/1x.webp')}
+.about-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:3rem;
+  align-items:center;
+  justify-content:center;
+}
+.about-wrap img{
+  width:340px;
+  border-radius:12px;
+}
+
+/* ================= SKILLS ================= */
+#skills{--bg:url('https://cdn.7tv.app/paint/01JK6NVC5W6VS5D0KTJXF6SQRC/layer/01JK6NX4DTTXK1527D5PWZ38X9/1x.webp')}
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:2rem;
+  width:100%;
+  max-width:1000px;
+}
+.skill{
+  border:2px solid #fff;
+  border-radius:12px;
+  padding:1.5rem;
+  text-align:center;
+}
+.skill img{
+  width:60px;
+  height:60px;
+  margin-bottom:1rem;
+}
+.bar{
+  width:100%;
+  height:6px;
+  background:#333;
+  border-radius:6px;
+  margin-top:.8rem;
+}
+.fill{
+  height:100%;
+  background:#00d4ff;
+  border-radius:6px;
+}
+
+/* ================= PORTFOLIO ================= */
+#portfolio{--bg:url('https://cdn.7tv.app/paint/01J5RED5XG000B1N2JYV35K6EC/layer/01JAMR39Z9X87VV32WG5B4TR78/1x.webp')}
+.portfolio-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2rem;
+  width:100%;
+  max-width:1100px;
+}
+.portfolio-item{
+  position:relative;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+}
+.portfolio-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.4s;
+}
+.portfolio-item:hover img{transform:scale(1.1)}
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:.3s;
+}
+.portfolio-item:hover .overlay{opacity:1}
+
+/* ================= FOOTER ================= */
+footer{
+  padding:3rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* ================= CURSOR ================= */
+.trail{
+  position:fixed;
+  width:14px;
+  height:14px;
+  background:rgba(255,255,255,.5);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<header class="visible">
+  <h1>hannes rieder*</h1>
+  <p>digital portfolio – work in progress</p>
+  <div class="socials">
+    <a href="https://instagram.com/gipflaer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://linkedin.com/in/hannesrieder" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="mailto:hannesrieder08@gmail.com" aria-label="Mail"><i class="fas fa-envelope"></i></a>
+  </div>
+</header>
+
+<main>
+
+<section id="about">
+  <h2 class="heading" data-text="about me">about me</h2>
+  <div class="about-wrap">
+    <p>
+      Hallo, ich heisse Hannes und bin Mediamatiker in Ausbildung.  
+      Ich liebe kreative Webexperimente, modernes Design und interaktive Interfaces.
+    </p>
+    <img src="img/img7.webp" loading="lazy" alt="Portrait of Hannes Rieder">
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="heading" data-text="skills">skills</h2>
+  <div class="skills-grid">
+    <div class="skill"><img src="icons/HTML5.svg"><strong>HTML</strong><div class="bar"><div class="fill" style="width:90%"></div></div></div>
+    <div class="skill"><img src="icons/CSS3.svg"><strong>CSS</strong><div class="bar"><div class="fill" style="width:85%"></div></div></div>
+    <div class="skill"><img src="icons/JavaScript.svg"><strong>JavaScript</strong><div class="bar"><div class="fill" style="width:80%"></div></div></div>
+    <div class="skill"><img src="icons/Three.js.svg"><strong>Three.js</strong><div class="bar"><div class="fill" style="width:60%"></div></div></div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <h2 class="heading" data-text="my work">my work</h2>
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <img src="img/project1.webp" loading="lazy">
+      <div class="overlay">Creative Coding</div>
+    </div>
+    <div class="portfolio-item">
+      <img src="img/project2.webp" loading="lazy">
+      <div class="overlay">Web Experiment</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <strong>hannes rieder*</strong>
+  <div class="socials">
+    <a href="https://instagram.com/gipflaer"><i class="fab fa-instagram"></i></a>
+    <a href="https://linkedin.com/in/hannesrieder"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+</footer>
+
+<div class="trail"></div>
+
+<script>
+/* Section reveal */
+const observer=new IntersectionObserver(e=>e.forEach(i=>i.isIntersecting&&i.target.classList.add('visible')));
+document.querySelectorAll('section').forEach(s=>observer.observe(s));
+
+/* Cursor trail */
+const trail=document.querySelector('.trail');
+let x=0,y=0,tx=0,ty=0;
+window.addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY});
+(function animate(){
+  tx+=(x-tx)*.2;ty+=(y-ty)*.2;
+  trail.style.left=tx+'px';
+  trail.style.top=ty+'px';
+  requestAnimationFrame(animate);
+})();
+</script>
+
+</body>
+</html>
