@@ -1,290 +1,694 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Hannes Rieder – Digital Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>hannes.</title>
 
-<meta name="description" content="Digital portfolio of Hannes Rieder – Mediamatiker, Web Developer & Creative Coder.">
-<meta name="author" content="Hannes Rieder">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
 
-<link rel="icon" type="image/x-icon" href="faviconn.ico">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #000;
+      --fg: #fff;
+      --muted: rgba(255,255,255,0.65);
+      --panel: rgba(0,0,0,0.92);
+      --border: rgba(255,255,255,0.18);
+      --accent: #00d4ff;
+    }
 
-<style>
-/* ================= GLOBAL ================= */
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Space Grotesk',sans-serif;
-  background:#000;
-  color:#fff;
-  overflow-x:hidden;
-}
+    * { box-sizing: border-box; margin:0; padding:0; }
+    html, body { height:100%; }
+    body{
+      font-family: "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow: hidden; /* no scroll */
+    }
 
-section{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:6rem 2rem;
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s ease;
-}
-section.visible{
-  opacity:1;
-  transform:translateY(0);
+    /* Background physics */
+#matter-bg{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: auto; /* allow dragging */
 }
 
-p{
-  color:#aaa;
-  font-size:1.3rem;
-  max-width:700px;
-  text-align:center;
-  line-height:1.6;
-}
+.topbar, .center, .overlay { position: fixed; z-index: 10; }
+.topbar { z-index: 20; }
+.overlay { z-index: 30; }
 
-/* ================= TEXTURE HEADINGS ================= */
-.heading{
-  position:relative;
-  font-size:clamp(3rem,8vw,6rem);
-  font-weight:700;
-  text-transform:lowercase;
-  text-align:center;
-  background:var(--bg) no-repeat center/cover;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:moveBg 25s linear infinite;
-  margin-bottom:3rem;
-}
-.heading::after{
-  content:attr(data-text);
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  background:var(--bg) no-repeat center/cover;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  filter:blur(40px) opacity(.6);
-}
 
-@keyframes moveBg{
-  0%{background-position:0% 0%}
-  50%{background-position:100% 100%}
-  100%{background-position:0% 0%}
-}
+    /* hidden svg bin */
+    #svg-bin{
+      position:absolute; left:-99999px; top:-99999px;
+      width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;
+    }
 
-/* ================= HERO ================= */
-header{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-header h1{
-  font-size:clamp(4rem,12vw,10rem);
-  background:url('https://cdn.7tv.app/paint/01H4KSAWP80000TDEXCZCHXRPB/layer/01JAMR28DRMJ1C6EHWTDH8T5X3/1x.webp') no-repeat center/cover;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:moveBg 25s linear infinite;
-}
-.socials{
-  display:flex;
-  gap:2rem;
-  margin-top:2rem;
-}
-.socials a{
-  font-size:1.8rem;
-  color:#fff;
-  transition:.3s;
-}
-.socials a:hover{color:#00d4ff;transform:scale(1.2)}
+    /* Top bar */
+    .topbar{
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      z-index: 20;
+      pointer-events: none; /* only children clickable */
+    }
 
-/* ================= ABOUT ================= */
-#about{--bg:url('https://cdn.7tv.app/paint/01J5RED5XG000B1N2JYV35K6EC/layer/01JAMR39Z9X87VV32WG5B4TR78/1x.webp')}
-.about-wrap{
-  display:flex;
-  flex-wrap:wrap;
-  gap:3rem;
-  align-items:center;
-  justify-content:center;
-}
-.about-wrap img{
-  width:340px;
-  border-radius:12px;
-}
+    .logo{
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      text-decoration: none;
+      color: var(--fg);
+      opacity: 0.92;
+    }
+    .logo-badge{
+      width: 30px; height: 30px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .logo-text{
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      opacity: 0.85;
+    }
 
-/* ================= SKILLS ================= */
-#skills{--bg:url('https://cdn.7tv.app/paint/01JK6NVC5W6VS5D0KTJXF6SQRC/layer/01JK6NX4DTTXK1527D5PWZ38X9/1x.webp')}
-.skills-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:2rem;
-  width:100%;
-  max-width:1000px;
-}
-.skill{
-  border:2px solid #fff;
-  border-radius:12px;
-  padding:1.5rem;
-  text-align:center;
-}
-.skill img{
-  width:60px;
-  height:60px;
-  margin-bottom:1rem;
-}
-.bar{
-  width:100%;
-  height:6px;
-  background:#333;
-  border-radius:6px;
-  margin-top:.8rem;
-}
-.fill{
-  height:100%;
-  background:#00d4ff;
-  border-radius:6px;
-}
+    /* Burger */
+    .burger{
+      pointer-events: auto;
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor: pointer;
+    }
+    .burger:focus-visible{
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+    .burger-lines{
+      width: 18px;
+      height: 14px;
+      position: relative;
+    }
+    .burger-lines span{
+      position:absolute;
+      left:0; right:0;
+      height: 2px;
+      background: var(--fg);
+      border-radius: 2px;
+      transition: transform .25s ease, opacity .2s ease, top .25s ease;
+    }
+    .burger-lines span:nth-child(1){ top: 0; }
+    .burger-lines span:nth-child(2){ top: 6px; opacity: 0.9; }
+    .burger-lines span:nth-child(3){ top: 12px; }
 
-/* ================= PORTFOLIO ================= */
-#portfolio{--bg:url('https://cdn.7tv.app/paint/01J5RED5XG000B1N2JYV35K6EC/layer/01JAMR39Z9X87VV32WG5B4TR78/1x.webp')}
-.portfolio-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:2rem;
-  width:100%;
-  max-width:1100px;
-}
-.portfolio-item{
-  position:relative;
-  border-radius:12px;
-  overflow:hidden;
-  cursor:pointer;
-}
-.portfolio-item img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:.4s;
-}
-.portfolio-item:hover img{transform:scale(1.1)}
-.overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  transition:.3s;
-}
-.portfolio-item:hover .overlay{opacity:1}
+    .burger.is-open .burger-lines span:nth-child(1){ top: 6px; transform: rotate(45deg); }
+    .burger.is-open .burger-lines span:nth-child(2){ opacity: 0; }
+    .burger.is-open .burger-lines span:nth-child(3){ top: 6px; transform: rotate(-45deg); }
 
-/* ================= FOOTER ================= */
-footer{
-  padding:3rem;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+    /* Center content */
+    .center{
+      position: fixed;
+      inset: 0;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      z-index: 10;
+      padding: 0 18px;
+      pointer-events: none; /* only interactive elements enable */
+    }
 
-/* ================= CURSOR ================= */
-.trail{
-  position:fixed;
-  width:14px;
-  height:14px;
-  background:rgba(255,255,255,.5);
-  border-radius:50%;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  z-index:9999;
-}
-</style>
+    .name{
+      pointer-events: none;
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      opacity: 0.96;
+    }
+
+    .subtitle{
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .social{
+      pointer-events: auto;
+      margin-top: 18px;
+      display:flex;
+      gap: 16px;
+      align-items:center;
+      justify-content:center;
+    }
+    .social a{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--fg);
+      text-decoration:none;
+      transition: transform .18s ease, border-color .18s ease, color .18s ease;
+    }
+    .social a:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.35);
+      color: var(--accent);
+    }
+    .social a:focus-visible{
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* Menu overlay */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+    .overlay.is-open{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .panel{
+      position: absolute;
+      top: 86px;
+      right: 22px;
+      width: min(520px, calc(100% - 44px));
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      overflow: hidden;
+      transform: translateY(-8px);
+      opacity: 0;
+      transition: transform .22s ease, opacity .22s ease;
+    }
+    .overlay.is-open .panel{
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .panel-header{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .panel-title{
+      font-weight: 650;
+      letter-spacing: 0.01em;
+      font-size: 14px;
+      opacity: 0.95;
+    }
+    .panel-close{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: var(--fg);
+      cursor: pointer;
+    }
+
+    .tabs{
+      display:flex;
+      gap: 8px;
+      padding: 12px 16px 0 16px;
+      flex-wrap: wrap;
+    }
+    .tab{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: var(--fg);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: border-color .18s ease, color .18s ease;
+    }
+    .tab:hover{ border-color: rgba(255,255,255,0.3); }
+    .tab[aria-selected="true"]{
+      border-color: rgba(255,255,255,0.4);
+      color: var(--accent);
+    }
+
+    .content{
+      padding: 14px 16px 18px 16px;
+      color: rgba(255,255,255,0.82);
+      font-size: 14px;
+      line-height: 1.55;
+      max-height: min(62vh, 520px);
+      overflow: auto;
+    }
+    .content h3{
+      margin: 10px 0 6px 0;
+      font-size: 14px;
+      color: rgba(255,255,255,0.92);
+    }
+    .content ul{ margin-left: 16px; margin-top: 8px; }
+    .content li{ margin: 6px 0; }
+
+    /* small hint bottom */
+    .hint{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="visible">
-  <h1>hannes rieder*</h1>
-  <p>digital portfolio – work in progress</p>
-  <div class="socials">
-    <a href="https://instagram.com/gipflaer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="https://linkedin.com/in/hannesrieder" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-    <a href="mailto:hannesrieder08@gmail.com" aria-label="Mail"><i class="fas fa-envelope"></i></a>
-  </div>
-</header>
+  <!-- Physics background mount -->
+  <div id="matter-bg" aria-hidden="true"></div>
 
-<main>
+  <!-- Hidden SVG mount -->
+  <div id="svg-bin" aria-hidden="true"></div>
 
-<section id="about">
-  <h2 class="heading" data-text="about me">about me</h2>
-  <div class="about-wrap">
-    <p>
-      Hallo, ich heisse Hannes und bin Mediamatiker in Ausbildung.  
-      Ich liebe kreative Webexperimente, modernes Design und interaktive Interfaces.
-    </p>
-    <img src="img/img7.webp" loading="lazy" alt="Portrait of Hannes Rieder">
-  </div>
-</section>
+  <!-- Top bar -->
+  <header class="topbar">
+    <a class="logo" href="#" aria-label="Home">
+      <span class="logo-badge">h</span>
+      <span class="logo-text">hannes</span>
+    </a>
 
-<section id="skills">
-  <h2 class="heading" data-text="skills">skills</h2>
-  <div class="skills-grid">
-    <div class="skill"><img src="icons/HTML5.svg"><strong>HTML</strong><div class="bar"><div class="fill" style="width:90%"></div></div></div>
-    <div class="skill"><img src="icons/CSS3.svg"><strong>CSS</strong><div class="bar"><div class="fill" style="width:85%"></div></div></div>
-    <div class="skill"><img src="icons/JavaScript.svg"><strong>JavaScript</strong><div class="bar"><div class="fill" style="width:80%"></div></div></div>
-    <div class="skill"><img src="icons/Three.js.svg"><strong>Three.js</strong><div class="bar"><div class="fill" style="width:60%"></div></div></div>
-  </div>
-</section>
+    <button class="burger" id="burger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-overlay" aria-label="Open menu">
+      <span class="burger-lines" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </header>
 
-<section id="portfolio">
-  <h2 class="heading" data-text="my work">my work</h2>
-  <div class="portfolio-grid">
-    <div class="portfolio-item">
-      <img src="img/project1.webp" loading="lazy">
-      <div class="overlay">Creative Coding</div>
+  <!-- Center content -->
+  <main class="center" aria-label="Homepage">
+    <div class="name">hannes rieder</div>
+    <div class="subtitle">digital portfolio</div>
+
+    <nav class="social" aria-label="Social links">
+      <a href="https://instagram.com/gipflaer" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://linkedin.com/in/hannesrieder" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="mailto:hannesrieder08@gmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </nav>
+  </main>
+
+  <div class="hint">drag disabled • press M for menu</div>
+
+  <!-- Menu overlay -->
+  <div class="overlay" id="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">menu</div>
+        <button class="panel-close" id="close-menu" type="button" aria-label="Close menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Sections">
+        <button class="tab" role="tab" aria-selected="true" data-tab="about">about me</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="skills">skills</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="projects">projects</button>
+      </div>
+
+      <div class="content" id="panel-content">
+        <!-- filled by JS -->
+      </div>
     </div>
-    <div class="portfolio-item">
-      <img src="img/project2.webp" loading="lazy">
-      <div class="overlay">Web Experiment</div>
-    </div>
   </div>
-</section>
 
-</main>
+  <!-- Matter dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/pathseg@1.2.1/pathseg.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/matter-js@0.20.0/build/matter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/poly-decomp@0.3.0/build/decomp.min.js"></script>
 
-<footer>
-  <strong>hannes rieder*</strong>
-  <div class="socials">
-    <a href="https://instagram.com/gipflaer"><i class="fab fa-instagram"></i></a>
-    <a href="https://linkedin.com/in/hannesrieder"><i class="fab fa-linkedin-in"></i></a>
-  </div>
-</footer>
+  <script>
+  // ---------- MENU (no scrolling site; overlay panels) ----------
+  (() => {
+    const burger = document.getElementById("burger");
+    const overlay = document.getElementById("menu-overlay");
+    const closeBtn = document.getElementById("close-menu");
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+    const content = document.getElementById("panel-content");
 
-<div class="trail"></div>
+    const panels = {
+      about: `
+        <h3>hi.</h3>
+        <p>Ich heisse Hannes und bin in der Ausbildung zum Mediamatiker. Ich liebe Design, Web-Experimente und digitale Projekte.</p>
+        <h3>focus</h3>
+        <ul>
+          <li>Web design & interaction</li>
+          <li>Content / Foto / Video</li>
+          <li>Creative coding</li>
+        </ul>
+      `,
+      skills: `
+        <h3>skills</h3>
+        <ul>
+          <li>HTML, CSS, JavaScript, TypeScript</li>
+          <li>Three.js, Matter.js, Zdog</li>
+          <li>Premiere / Photoshop</li>
+          <li>Node.js / Basic Backend</li>
+        </ul>
+      `,
+      projects: `
+        <h3>projects</h3>
+        <p>Coming Soon</p>
+
+      `
+    };
+
+    function setTab(key){
+      tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === key)));
+      content.innerHTML = panels[key] || "";
+    }
+
+    function openMenu(){
+      overlay.classList.add("is-open");
+      burger.classList.add("is-open");
+      burger.setAttribute("aria-expanded", "true");
+    }
+    function closeMenu(){
+      overlay.classList.remove("is-open");
+      burger.classList.remove("is-open");
+      burger.setAttribute("aria-expanded", "false");
+    }
+
+    burger.addEventListener("click", () => {
+      overlay.classList.contains("is-open") ? closeMenu() : openMenu();
+    });
+
+    closeBtn.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) closeMenu(); });
+
+    tabs.forEach(t => t.addEventListener("click", () => setTab(t.dataset.tab)));
+
+    // keyboard
+    addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+      if (e.key.toLowerCase() === "m") {
+        overlay.classList.contains("is-open") ? closeMenu() : openMenu();
+      }
+    });
+
+    // init
+    setTab("about");
+  })();
+  </script>
 
 <script>
-/* Section reveal */
-const observer=new IntersectionObserver(e=>e.forEach(i=>i.isIntersecting&&i.target.classList.add('visible')));
-document.querySelectorAll('section').forEach(s=>observer.observe(s));
+(() => {
+  const mountEl = document.getElementById("matter-bg");
+  const svgBin = document.getElementById("svg-bin");
+  if (!mountEl || !svgBin) return;
 
-/* Cursor trail */
-const trail=document.querySelector('.trail');
-let x=0,y=0,tx=0,ty=0;
-window.addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY});
-(function animate(){
-  tx+=(x-tx)*.2;ty+=(y-ty)*.2;
-  trail.style.left=tx+'px';
-  trail.style.top=ty+'px';
-  requestAnimationFrame(animate);
+const {
+  Engine, Render, Runner, Composite, Bodies, Body,
+  Mouse, MouseConstraint,
+  Svg, Vertices, Common
+} = Matter;
+
+
+  if (window.decomp) Common.setDecomp(window.decomp);
+
+  const engine = Engine.create();
+  engine.gravity.y = 1;
+
+  const render = Render.create({
+    element: mountEl,
+    engine,
+    options: {
+      width: mountEl.clientWidth,
+      height: mountEl.clientHeight,
+      wireframes: false,
+      background: "transparent",
+      pixelRatio: devicePixelRatio || 1
+    }
+  });
+
+  Render.run(render);
+  const runner = Runner.create();
+  Runner.run(runner, engine);
+
+  // --- helpers
+  const select = (root, sel) => Array.from(root.querySelectorAll(sel));
+
+  async function fetchSvgText(url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to fetch ${url} (${res.status})`);
+    return await res.text();
+  }
+
+  function mountSvg(svgText) {
+    svgBin.innerHTML = svgText;
+    return svgBin.querySelector("svg");
+  }
+
+  function unmountSvg() {
+    svgBin.innerHTML = "";
+  }
+
+  function bounds(verts) {
+    let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+    for (const v of verts) {
+      if (v.x < minX) minX = v.x;
+      if (v.y < minY) minY = v.y;
+      if (v.x > maxX) maxX = v.x;
+      if (v.y > maxY) maxY = v.y;
+    }
+    return {
+      minX, minY, maxX, maxY,
+      w: maxX - minX,
+      h: maxY - minY,
+      cx: (minX + maxX) / 2,
+      cy: (minY + maxY) / 2
+    };
+  }
+
+  function applyStyle(body) {
+    const style = {
+      fillStyle: "rgba(255,255,255,0.10)",
+      strokeStyle: "rgba(0,0,0,0)",
+      lineWidth: 0
+    };
+    body.render.visible = true;
+    Object.assign(body.render, style);
+    if (body.parts) body.parts.forEach(p => Object.assign(p.render, style));
+  }
+
+  function svgToVertexSets(svgEl, scale) {
+    const paths = select(svgEl, "path");
+    if (!paths.length) return { sets: [], width: 0, height: 0 };
+
+    const sample = 90; // smooth for big letters
+    const sets = paths.map(p => {
+      const v = Svg.pathToVertices(p, sample);
+      return Vertices.scale(v, scale, scale);
+    });
+
+    let all = [];
+    sets.forEach(s => all = all.concat(s));
+    if (!all.length) return { sets: [], width: 0, height: 0 };
+
+    const b = bounds(all);
+    sets.forEach(s => s.forEach(v => { v.x -= b.cx; v.y -= b.cy; }));
+
+    return { sets, width: b.w, height: b.h };
+  }
+
+  function makeLetterBody(x, y, sets, label) {
+    let body = Bodies.fromVertices(
+      x, y, sets,
+      { restitution: 0.2, friction: 0.22, frictionAir: 0.02 },
+      true
+    );
+
+    if (!body) {
+      console.warn("fromVertices null for", label);
+      return null;
+    }
+
+    // If matter returns multiple bodies, add them all; return the first
+    if (Array.isArray(body)) {
+      body.forEach(b => { applyStyle(b); Composite.add(engine.world, b); });
+      return body[0] || null;
+    }
+
+    applyStyle(body);
+    Composite.add(engine.world, body);
+    return body;
+  }
+
+  // --- walls (NO TOP WALL)
+  const WALL = 320;
+  let walls = [];
+
+  function rebuildWalls(w, h) {
+    if (walls.length) Composite.remove(engine.world, walls);
+
+    const opts = { isStatic: true, render: { visible: false } };
+
+    const bottom = Bodies.rectangle(w / 2, h + WALL / 2, w + WALL * 2, WALL, opts);
+    const left   = Bodies.rectangle(-WALL / 2, h / 2, WALL, h + WALL * 2, opts);
+    const right  = Bodies.rectangle(w + WALL / 2, h / 2, WALL, h + WALL * 2, opts);
+
+    walls = [bottom, left, right];
+    Composite.add(engine.world, walls);
+  }
+
+  function resize() {
+    const w = mountEl.clientWidth || innerWidth;
+    const h = mountEl.clientHeight || innerHeight;
+    const pr = devicePixelRatio || 1;
+
+    render.options.width = w;
+    render.options.height = h;
+    render.options.pixelRatio = pr;
+
+    render.canvas.width = w * pr;
+    render.canvas.height = h * pr;
+    render.canvas.style.width = w + "px";
+    render.canvas.style.height = h + "px";
+
+    rebuildWalls(w, h);
+    Matter.Render.lookAt(render, { min: { x: 0, y: 0 }, max: { x: w, y: h } });
+  }
+
+  addEventListener("resize", resize);
+  resize();
+
+  // --- Mouse drag
+const mouse = Mouse.create(render.canvas);
+
+// fix mouse scaling with high-DPI canvas
+mouse.pixelRatio = render.options.pixelRatio || (devicePixelRatio || 1);
+
+const mouseConstraint = MouseConstraint.create(engine, {
+  mouse,
+  constraint: {
+    stiffness: 0.15,
+    damping: 0.1,
+    render: { visible: false }
+  }
+});
+
+Composite.add(engine.world, mouseConstraint);
+render.mouse = mouse;
+
+
+  // --- ONE-TIME: spawn "hannes." next to each other, then let it fall
+  async function spawnHannesOnce() {
+    const word = "hannes";
+    const files = word.split("").map(c => `./svg/${c}.svg`);
+
+    const w = mountEl.clientWidth || innerWidth;
+    const h = mountEl.clientHeight || innerHeight;
+
+    // Big, but not too huge
+    const targetHeight = Math.max(220, Math.min(520, h * 0.35));
+    const gap = Math.max(28, targetHeight * 0.14);
+    const y = h * 0.28; // spawn line
+
+    // load all svgs
+    const svgTexts = await Promise.all(files.map(fetchSvgText));
+
+    // parse each letter
+    const letterData = [];
+    for (let i = 0; i < files.length; i++) {
+      const svgEl = mountSvg(svgTexts[i]);
+
+      const tmp = svgToVertexSets(svgEl, 1);
+      const scale = tmp.height ? (targetHeight / tmp.height) : 1;
+      const final = svgToVertexSets(svgEl, scale);
+
+      unmountSvg();
+      letterData.push({ ...final, file: files[i] });
+    }
+
+    // center the word horizontally
+    const totalW = letterData.reduce((s, d) => s + d.width, 0) + gap * (letterData.length - 1);
+    let x = (w - totalW) / 2;
+
+    // spawn letters side by side
+    letterData.forEach(d => {
+      if (!d.sets.length) { x += d.width + gap; return; }
+
+      const body = makeLetterBody(
+        x + d.width / 2,
+        y,
+        d.sets,
+        d.file
+      );
+
+      if (body) {
+        // almost no rotation to avoid overlap at start
+        Body.setAngle(body, (Math.random() - 0.5) * 0.04);
+        Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.01);
+      }
+
+      x += d.width + gap;
+    });
+
+    // dot at the end
+    const dotR = Math.max(16, targetHeight * 0.10);
+    const dot = Bodies.circle(
+      x - gap * 0.35,
+      y - targetHeight * 0.05,
+      dotR,
+      { restitution: 0.35, friction: 0.2, frictionAir: 0.02 }
+    );
+    applyStyle(dot);
+    Composite.add(engine.world, dot);
+  }
+
+  // run once
+  spawnHannesOnce().catch(console.error);
+
 })();
 </script>
+
 
 </body>
 </html>
