@@ -42,6 +42,8 @@
 .topbar, .center, .overlay { position: fixed; z-index: 10; }
 .topbar { z-index: 20; }
 .overlay { z-index: 30; }
+    .topbar { height: 92px; }
+
 
 
     /* hidden svg bin */
@@ -360,25 +362,38 @@
   <!-- Hidden SVG mount -->
   <div id="svg-bin" aria-hidden="true"></div>
 
-<div class="logo-stack" aria-label="Home">
-  <a class="logo" href="#" aria-label="Home">
-    <span class="logo-badge">h</span>
-    <span class="logo-text">hannes</span>
-  </a>
+<header class="topbar">
 
-  <a class="sc-link" href="https://sc.hannesrieder.ch" target="_blank" rel="noopener noreferrer" aria-label="sc uploader">
-    <span class="sc-badge">sc</span>
-    <span class="sc-text">uploader</span>
-  </a>
-</div>
+  <div class="logo-stack" aria-label="Home">
+    <a class="logo" href="#" aria-label="Home">
+      <span class="logo-badge">h</span>
+      <span class="logo-text">hannes</span>
+    </a>
 
+    <a class="sc-link"
+       href="https://sc.hannesrieder.ch"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="sc uploader">
+      <span class="sc-badge">sc</span>
+      <span class="sc-text">uploader</span>
+    </a>
+  </div>
 
-    <button class="burger" id="burger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-overlay" aria-label="Open menu">
-      <span class="burger-lines" aria-hidden="true">
-        <span></span><span></span><span></span>
-      </span>
-    </button>
-  </header>
+  <button class="burger"
+          id="burger"
+          type="button"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="menu-overlay"
+          aria-label="Open menu">
+    <span class="burger-lines" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </span>
+  </button>
+
+</header>
+
 
   <!-- Center content -->
   <main class="center" aria-label="Homepage">
