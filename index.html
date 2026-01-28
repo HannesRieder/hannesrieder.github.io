@@ -88,6 +88,59 @@
       opacity: 0.85;
     }
 
+    /* logo stack (2 lines) */
+.logo-stack{
+  pointer-events: auto;          /* makes both links clickable */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;                      /* space between hannes + sc uploader */
+  align-items: flex-start;
+}
+
+/* sc uploader link */
+.sc-link{
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  text-decoration: none;
+  color: var(--fg);
+  opacity: 0.72;
+  transform: translateY(-2px);   /* sits nicely under the top logo */
+  font-size: 12px;
+}
+
+.sc-link:hover{
+  opacity: 0.95;
+  color: var(--accent);
+}
+
+.sc-link:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+
+.sc-badge{
+  width: 30px; height: 22px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display:flex; align-items:center; justify-content:center;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.sc-text{
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+}
+
+
     /* Burger */
     .burger{
       pointer-events: auto;
@@ -307,12 +360,18 @@
   <!-- Hidden SVG mount -->
   <div id="svg-bin" aria-hidden="true"></div>
 
-  <!-- Top bar -->
-  <header class="topbar">
-    <a class="logo" href="#" aria-label="Home">
-      <span class="logo-badge">h</span>
-      <span class="logo-text">hannes</span>
-    </a>
+<div class="logo-stack" aria-label="Home">
+  <a class="logo" href="#" aria-label="Home">
+    <span class="logo-badge">h</span>
+    <span class="logo-text">hannes</span>
+  </a>
+
+  <a class="sc-link" href="https://sc.hannesrieder.ch" target="_blank" rel="noopener noreferrer" aria-label="sc uploader">
+    <span class="sc-badge">sc</span>
+    <span class="sc-text">uploader</span>
+  </a>
+</div>
+
 
     <button class="burger" id="burger" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu-overlay" aria-label="Open menu">
       <span class="burger-lines" aria-hidden="true">
